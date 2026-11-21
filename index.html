@@ -216,29 +216,48 @@
   .btn-navy { background: var(--navy); color: var(--ice); }
   .btn-navy:hover { background: var(--deep); }
 
-  .facts {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    gap: clamp(0.85rem, 3vw, 2rem);
-    margin: 0;
+  .specialties {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 2rem 0 0;
     padding: 0;
     list-style: none;
   }
-  .facts li { min-width: 0; }
-  .facts strong {
-    display: block;
-    color: var(--ice);
-    font-size: 1.5rem;
-    line-height: 1.1;
-    font-weight: 700;
+  .specialties li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(100, 116, 139, 0.85);
+    border-radius: 12px;
+    background: transparent;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
   }
-  .facts span {
-    display: block;
+  .specialties li:hover {
+    border-color: var(--blue);
+    background: rgba(59, 130, 246, 0.08);
+  }
+  .specialties svg {
+    flex: 0 0 1.35rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.15rem;
+    color: var(--blue);
+  }
+  .specialty-title {
+    margin: 0;
+    color: var(--ice);
+    font-size: 0.98rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .specialty-note {
+    margin: 0.2rem 0 0;
     color: var(--ice);
     font-size: 0.85rem;
-    line-height: 1.3;
-    white-space: nowrap;
+    line-height: 1.4;
   }
 
   .portrait {
@@ -430,7 +449,7 @@
   @media (max-width: 640px) {
     section { padding: 3.5rem 0; }
     #hero { padding: 3rem 0 3.25rem; }
-    .certs { grid-template-columns: 1fr; }
+    .certs, .specialties { grid-template-columns: 1fr; }
     h1 { font-size: 2.3rem; }
   }
 
@@ -463,7 +482,8 @@
 
 <main>
   <section id="hero">
-    <div class="wrap hero-grid">
+    <div class="wrap">
+    <div class="hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Product Owner | IT Business Analyst</p>
         <h1>May Shoon<br>Lett Zaw</h1>
@@ -473,15 +493,46 @@
           <a class="btn btn-light" href="#experience">View experience</a>
           <a class="btn btn-ghost" href="#contact">Contact</a>
         </div>
-        <ul class="facts">
-          <li><strong>4+</strong><span>Years in IT</span></li>
-          <li><strong>5+</strong><span>Platforms &amp; Systems</span></li>
-          <li><strong>4</strong><span>Languages</span></li>
-        </ul>
       </div>
       <div class="portrait">
         <img src="images/portrait.jpg" alt="May Shoon Lett Zaw" width="1024" height="1024">
       </div>
+    </div>
+    <ul class="specialties">
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+        </svg>
+        <div>
+          <p class="specialty-title">Product Ownership</p>
+          <p class="specialty-note">User stories and acceptance criteria</p>
+        </div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <rect x="6" y="4.5" width="12" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9 3.5h6v3H9z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9 11h6M9 14.5h6M9 18h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <p class="specialty-title">Business Analysis</p>
+          <p class="specialty-note">Requirement gathering, process flows</p>
+        </div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 6v6c0 1.5 3.1 2.6 7 2.6s7-1.1 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 12v6c0 1.5 3.1 2.6 7 2.6s7-1.1 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <div>
+          <p class="specialty-title">Enterprise Systems</p>
+          <p class="specialty-note">SAP S/4HANA, Odoo, Acumatica</p>
+        </div>
+      </li>
+    </ul>
     </div>
   </section>
 
