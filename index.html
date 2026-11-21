@@ -4,656 +4,813 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>May Shoon Lett Zaw — Product Owner | IT Business Analyst</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add("js");</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ivory: #F7F3EC;
-    --paper: #FBF9F5;
-    --charcoal: #2B2B2B;
-    --muted: #5C534A;
-    --champagne: #C9B28A;
-    --ink: #6B5A42;
-    --line: rgba(43, 43, 43, 0.12);
-    --line-strong: rgba(43, 43, 43, 0.22);
-    --shadow: 0 22px 50px rgba(43, 43, 43, 0.12);
-    --serif: "Cormorant Garamond", "Palatino Linotype", Palatino, serif;
-    --sans: "DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --measure: 40rem;
-    --pad: clamp(1.25rem, 4vw, 4.5rem);
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --gold-dark: #8B6914;
+    --dark: #0F0D0A;
+    --dark-2: #1A1710;
+    --dark-3: #252218;
+    --cream: #F5F0E8;
+    --cream-2: #EDE6D6;
+    --text: #D4C9B0;
+    --text-muted: #7A7060;
+    --accent: #C9A96E;
   }
 
-  *, *::before, *::after { box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html { scroll-behavior: smooth; }
 
   body {
-    margin: 0;
-    background: var(--ivory);
-    color: var(--charcoal);
-    font-family: var(--sans);
-    font-size: 1.02rem;
-    font-weight: 400;
+    background-color: var(--dark);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
     line-height: 1.7;
-    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
-  img { max-width: 100%; display: block; }
-
-  a { color: var(--ink); }
-
-  :focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: 3px;
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
   }
 
-  .skip {
-    position: absolute;
-    left: 1rem;
-    top: -4rem;
-    background: var(--charcoal);
-    color: var(--paper);
-    padding: 0.6rem 1rem;
-    z-index: 200;
-    text-decoration: none;
-  }
-  .skip:focus { top: 1rem; }
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 2px; }
 
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
-    gap: 0.75rem 1.5rem;
-    padding: 1rem var(--pad);
-    background: rgba(251, 249, 245, 0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(15,13,10,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(6px);
   }
 
   .nav-logo {
-    font-family: var(--serif);
-    font-size: 1.45rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--charcoal);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
     text-decoration: none;
   }
 
   .nav-links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem 1.35rem;
+    gap: 2.5rem;
     list-style: none;
-    margin: 0;
-    padding: 0;
   }
 
   .nav-links a {
-    color: var(--muted);
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
+    transition: color 0.3s;
   }
-  .nav-links a:hover { color: var(--charcoal); }
+  .nav-links a:hover { color: var(--gold); }
 
-  .wrap {
-    width: min(1120px, 100%);
-    margin: 0 auto;
-    padding: 0 var(--pad);
-  }
-
-  section { padding: 5.5rem 0; }
-  section + section { border-top: 1px solid var(--line); }
-  #about, #skills, #certifications { background: var(--paper); }
-
-  .kicker {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    margin: 0 0 0.85rem;
-    color: var(--ink);
-    font-size: 0.74rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .kicker::after {
-    content: "";
-    width: 2.5rem;
-    height: 1px;
-    background: var(--champagne);
-  }
-
-  h1, h2, h3, .role, .project-title, .edu-name, .cert-name, .erp-name {
-    font-family: var(--serif);
-    font-weight: 500;
-    letter-spacing: -0.015em;
-  }
-
-  .section-title {
-    margin: 0 0 2.5rem;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    line-height: 1.05;
-    color: var(--charcoal);
-  }
-
-  /* Hero */
+  /* ── HERO ── */
   #hero {
-    padding-top: clamp(2.5rem, 6vw, 4.5rem);
-    padding-bottom: clamp(3rem, 7vw, 5.5rem);
-    overflow: visible;
-  }
-
-  .hero-grid {
+    min-height: 100vh;
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
   }
 
-  .hero-copy { min-width: 0; }
+  .hero-bg-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, rgba(201,169,110,0.03) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(201,169,110,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
 
-  .hero-kicker {
-    margin: 0 0 1.1rem;
-    color: var(--ink);
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+  .hero-bg-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%);
+    top: -100px; right: 100px;
+    pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
   }
 
   .hero-name {
-    margin: 0 0 1.1rem;
-    font-size: clamp(3.4rem, 7vw, 5.6rem);
-    line-height: 0.92;
-    font-weight: 500;
-    color: var(--charcoal);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
   }
+
   .hero-name em {
     font-style: italic;
-    font-weight: 500;
+    color: var(--gold);
   }
 
   .hero-desc {
-    max-width: 36rem;
-    margin: 0 0 2rem;
-    color: var(--muted);
-    font-size: 1.05rem;
-    line-height: 1.75;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 420px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
   }
 
   .hero-cta {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 2.4rem;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 2.9rem;
-    padding: 0.7rem 1.35rem;
-    border: 1px solid var(--charcoal);
-    font-family: var(--sans);
-    font-size: 0.78rem;
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.85rem 2rem;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
-    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   }
-  .btn-primary { background: var(--charcoal); color: var(--paper); }
-  .btn-primary:hover { background: #1c1c1c; transform: translateY(-1px); }
-  .btn-outline { background: transparent; color: var(--charcoal); }
-  .btn-outline:hover { background: rgba(43, 43, 43, 0.04); }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-  .hero-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem 1.75rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .hero-stats li { min-width: 5.5rem; }
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 2rem;
-    line-height: 1;
-    color: var(--charcoal);
-  }
-  .stat-label {
-    margin-top: 0.3rem;
-    color: var(--muted);
-    font-size: 0.72rem;
+  .btn-outline {
+    border: 1px solid rgba(201,169,110,0.4);
+    color: var(--gold);
+    padding: 0.85rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,169,110,0.05); }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
 
-  .portrait-wrap {
-    min-width: 0;
-    padding: 0 1.1rem 1.1rem 0;
-  }
-  .portrait {
+  .hero-photo-frame {
     position: relative;
-    width: min(100%, 440px);
-    margin-left: auto;
-    aspect-ratio: 4 / 5;
+    width: 360px;
+    height: 460px;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.5s forwards;
   }
-  .portrait::before {
-    content: "";
+
+  .hero-photo-frame::before {
+    content: '';
     position: absolute;
-    inset: 1rem -1rem -1rem 1rem;
-    border: 1px solid var(--champagne);
-    pointer-events: none;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--gold), transparent 50%, var(--gold-dark));
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    z-index: 0;
   }
-  .portrait img {
-    position: relative;
-    z-index: 1;
+
+  .hero-photo-inner {
+    position: absolute;
+    inset: 2px;
+    overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    background: var(--dark-3);
+  }
+
+  .hero-photo-inner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 18%;
-    filter: none;
-    box-shadow: var(--shadow);
-    background: #e7e1d6;
+    object-position: top;
+    filter: sepia(20%) contrast(1.05);
   }
 
-  /* About */
-  .about-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2.5rem, 6vw, 5rem);
-    align-items: start;
+  .hero-photo-decoration {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    border: 1px solid rgba(201,169,110,0.2);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   }
-  .about-quote {
-    margin: 0 0 1.5rem;
-    padding-left: 1.15rem;
-    border-left: 1px solid var(--champagne);
-    font-family: var(--serif);
-    font-size: clamp(1.45rem, 2.4vw, 1.85rem);
-    font-style: italic;
-    font-weight: 500;
-    line-height: 1.35;
-    color: var(--charcoal);
-  }
-  .about-text {
-    max-width: var(--measure);
-    margin: 0 0 1.1rem;
-    color: var(--muted);
-  }
-  .contact-list { margin-top: 1.75rem; }
-  .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    margin: 0 0 0.7rem;
-    color: var(--muted);
-    font-size: 0.95rem;
-    overflow-wrap: anywhere;
-  }
-  .contact-icon {
-    flex: 0 0 1.7rem;
-    width: 1.7rem;
-    height: 1.7rem;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--champagne);
-    color: var(--ink);
-    font-size: 0.72rem;
-  }
-  .contact-item a { color: var(--ink); text-underline-offset: 0.15em; }
 
-  .edu-list, .stack { display: flex; flex-direction: column; gap: 0.9rem; }
-  .edu-card, .panel {
-    background: var(--ivory);
-    border: 1px solid var(--line);
-    padding: 1.15rem 1.25rem;
-  }
-  #about .edu-card { background: var(--paper); border-color: var(--line); }
-  .edu-label, .cert-provider, .project-num {
-    color: var(--ink);
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
+  .hero-photo-label {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
   }
-  .edu-name { margin: 0.25rem 0 0.15rem; font-size: 1.35rem; line-height: 1.15; }
-  .edu-meta, .project-desc, .timeline-bullets li { color: var(--muted); }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 3rem;
+    left: 6rem;
+    display: flex;
+    gap: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .divider-line {
+    width: 1px;
+    background: rgba(201,169,110,0.15);
+    align-self: stretch;
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section {
+    padding: 6rem 6rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 3.5rem;
+    line-height: 1.2;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--dark-2);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-left { position: relative; }
+
+  .about-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--gold);
+  }
+
+  .about-text {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-list { margin-top: 2rem; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .contact-icon {
+    width: 28px; height: 28px;
+    border: 1px solid rgba(201,169,110,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .contact-item a { color: var(--gold); text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
+
+  .about-right { }
 
   .lang-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.85rem;
-    margin-top: 1rem;
-  }
-  .lang-card {
-    padding: 0.95rem 1rem;
-    border: 1px solid var(--line);
-    background: var(--ivory);
-  }
-  .lang-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .lang-pct { font-family: var(--serif); font-size: 1.35rem; letter-spacing: 0; text-transform: none; color: var(--charcoal); }
-  .lang-bar {
-    height: 2px;
-    margin-top: 0.7rem;
-    background: rgba(43, 43, 43, 0.08);
-  }
-  .lang-bar span {
-    display: block;
-    height: 100%;
-    background: var(--ink);
+    gap: 1.25rem;
+    margin-top: 2rem;
   }
 
-  /* Timeline */
-  .timeline { margin: 0; padding: 0; list-style: none; }
+  .lang-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.1);
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .lang-card:hover { border-color: rgba(201,169,110,0.35); }
+
+  .lang-name {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .lang-pct {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .lang-bar {
+    margin-top: 0.75rem;
+    height: 2px;
+    background: rgba(201,169,110,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .lang-bar-fill {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    transition: width 1.5s ease;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--dark); }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(201,169,110,0.05));
+  }
+
   .timeline-item {
     position: relative;
-    padding: 0 0 2.75rem 1.75rem;
-    border-left: 1px solid var(--champagne);
+    margin-bottom: 3rem;
+    padding-left: 2.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 0.6s ease forwards;
   }
-  .timeline-item:last-child { padding-bottom: 0; }
-  .timeline-item::before {
-    content: "";
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+  .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+  .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+
+  .timeline-dot {
     position: absolute;
-    left: -4px;
-    top: 0.45rem;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--ivory);
-    border: 1px solid var(--ink);
+    left: -2.6rem;
+    top: 0.35rem;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
   }
-  #experience { background: var(--ivory); }
+
   .timeline-meta {
     display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
     flex-wrap: wrap;
-    gap: 0.4rem 0.9rem;
-    align-items: baseline;
-    margin-bottom: 0.35rem;
   }
+
   .timeline-date {
-    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    background: rgba(201,169,110,0.08);
+    padding: 0.2rem 0.7rem;
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+
+  .timeline-location {
     font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
   }
-  .timeline-location { color: var(--muted); font-size: 0.85rem; }
-  .timeline-role { margin: 0; font-size: clamp(1.6rem, 2.5vw, 2rem); line-height: 1.1; }
+
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+  }
+
   .timeline-company {
-    margin: 0.2rem 0 0.85rem;
-    color: var(--ink);
-    font-size: 0.95rem;
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    letter-spacing: 0.04em;
   }
+
   .timeline-bullets {
-    margin: 0;
-    padding: 0;
     list-style: none;
-    max-width: 46rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
   }
   .timeline-bullets li {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-left: 1.2rem;
     position: relative;
-    margin: 0 0 0.45rem;
-    padding-left: 1rem;
-    font-size: 0.98rem;
+    line-height: 1.6;
   }
   .timeline-bullets li::before {
-    content: "";
+    content: '›';
     position: absolute;
     left: 0;
-    top: 0.7em;
-    width: 0.4rem;
-    height: 1px;
-    background: var(--champagne);
+    color: var(--gold);
+    font-size: 1rem;
   }
 
-  /* Skills */
+  /* ── SKILLS ── */
+  #skills {
+    background: var(--dark-2);
+  }
+
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-  }
-  .skill-group {
-    min-width: 0;
-    padding: 1.4rem 1.25rem 1.5rem;
-    background: var(--ivory);
-    border: 1px solid var(--line);
-  }
-  .skill-group-icon { color: var(--champagne); font-size: 0.9rem; }
-  .skill-group-title {
-    margin: 0.45rem 0 1rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--line);
-    font-size: 1.55rem;
-  }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-  .skill-tag {
-    border: 1px solid var(--line-strong);
-    padding: 0.28rem 0.55rem;
-    color: var(--muted);
-    font-size: 0.78rem;
-    letter-spacing: 0.02em;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 
-  /* Projects */
+  .skill-group {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.1);
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  }
+  .skill-group:hover {
+    border-color: rgba(201,169,110,0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .skill-group-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-group-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--cream);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(201,169,110,0.12);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    border: 1px solid rgba(201,169,110,0.15);
+    padding: 0.25rem 0.65rem;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    color: var(--gold);
+    border-color: rgba(201,169,110,0.5);
+    background: rgba(201,169,110,0.05);
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--dark); }
+
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 2rem;
   }
-  .project-card {
-    min-width: 0;
-    padding: 1.5rem 1.4rem 1.6rem;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    transition: transform 0.3s ease, border-color 0.3s ease;
-  }
-  .project-card:hover { transform: translateY(-3px); border-color: var(--champagne); }
-  .project-num { margin-bottom: 0.8rem; }
-  .project-title { margin: 0 0 0.45rem; font-size: 1.85rem; line-height: 1.1; }
-  .project-link {
-    display: inline-block;
-    margin-bottom: 0.85rem;
-    color: var(--ink);
-    font-size: 0.85rem;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    border-bottom: 1px solid var(--champagne);
-  }
-  .project-link:hover { border-bottom-color: var(--ink); }
-  .project-desc { margin: 0; font-size: 0.98rem; }
 
-  /* Certifications */
-  .certs-wrapper, .erp-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.85rem;
-  }
-  .cert-card, .erp-platform {
-    min-width: 0;
-    padding: 1.2rem 1.15rem;
-    background: var(--ivory);
-    border: 1px solid var(--line);
-  }
-  #certifications .cert-card { background: var(--paper); }
-  .cert-name { margin-top: 0.35rem; font-size: 1.4rem; line-height: 1.15; }
-  .erp-name { margin: 0 0 0.8rem; font-size: 1.8rem; }
-  .erp-certs { margin: 0; padding: 0; list-style: none; }
-  .erp-certs li {
+  .project-card {
+    border: 1px solid rgba(201,169,110,0.1);
+    padding: 2.5rem;
     position: relative;
-    margin: 0 0 0.45rem;
-    padding-left: 0.9rem;
-    color: var(--muted);
+    overflow: hidden;
+    transition: all 0.35s;
+    background: var(--dark-2);
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover {
+    border-color: rgba(201,169,110,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+  }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(201,169,110,0.08);
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    line-height: 1;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .project-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    display: inline-block;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .project-link:hover { opacity: 1; }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* ── CERTS ── */
+  #certifications { background: var(--dark-2); }
+
+  .certs-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .cert-card {
+    background: var(--dark-3);
+    border: 1px solid rgba(201,169,110,0.1);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .cert-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .cert-card:hover { border-color: rgba(201,169,110,0.3); transform: translateY(-3px); }
+  .cert-card:hover::after { transform: scaleX(1); }
+
+  .cert-provider {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .cert-name {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* ── ERP ── */
+  #erp { background: var(--dark); }
+
+  .erp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .erp-platform {
+    border: 1px solid rgba(201,169,110,0.15);
+    padding: 2rem;
+    background: var(--dark-2);
+    transition: all 0.3s;
+  }
+  .erp-platform:hover {
+    border-color: rgba(201,169,110,0.35);
+    transform: translateY(-3px);
+  }
+
+  .erp-platform-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(201,169,110,0.12);
+  }
+
+  .erp-certs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .erp-certs li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.5;
   }
   .erp-certs li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.7em;
-    width: 0.35rem;
-    height: 1px;
-    background: var(--champagne);
+    content: '◆';
+    color: var(--gold);
+    font-size: 0.4rem;
+    margin-top: 0.45rem;
+    flex-shrink: 0;
   }
 
+  /* ── FOOTER ── */
   footer {
+    background: var(--dark-3);
+    padding: 3rem 6rem;
+    border-top: 1px solid rgba(201,169,110,0.1);
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 0.5rem 1.5rem;
-    padding: 2rem var(--pad) 2.4rem;
-    border-top: 1px solid var(--line);
-    background: var(--paper);
-  }
-  .footer-name { font-family: var(--serif); font-size: 1.4rem; }
-  .footer-copy { margin: 0; color: var(--muted); font-size: 0.9rem; }
-
-  /* Modal */
-  .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 80;
     align-items: center;
-    justify-content: center;
-    padding: 1.25rem;
-    background: rgba(43, 43, 43, 0.46);
-  }
-  .modal.is-open { display: flex; }
-  .modal-panel {
-    position: relative;
-    width: min(100%, 26rem);
-    padding: 1.75rem 1.5rem 1.5rem;
-    background: var(--paper);
-    border: 1px solid var(--champagne);
-    box-shadow: var(--shadow);
-  }
-  .modal-close {
-    position: absolute;
-    top: 0.7rem;
-    right: 0.7rem;
-    border: 0;
-    background: transparent;
-    color: var(--muted);
-    font-size: 1.1rem;
-    cursor: pointer;
-  }
-  .modal-kicker {
-    margin: 0 0 0.35rem;
-    color: var(--ink);
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-  .modal-title {
-    margin: 0 0 1.1rem;
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 500;
-  }
-  .modal-links { display: flex; flex-direction: column; gap: 0.6rem; }
-  .modal-links a, .modal-links button {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-    width: 100%;
-    padding: 0.8rem 0.9rem;
-    border: 1px solid var(--line);
-    background: var(--ivory);
-    color: var(--charcoal);
-    font-family: var(--sans);
-    font-size: 0.92rem;
-    text-align: left;
-    text-decoration: none;
-    cursor: pointer;
-    overflow-wrap: anywhere;
-  }
-  .modal-links a:hover { border-color: var(--champagne); }
-  #copy-btn {
-    justify-content: center;
-    background: var(--charcoal);
-    color: var(--paper);
-    border-color: var(--charcoal);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    font-weight: 500;
   }
 
-  .js .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  .js .reveal.is-in {
-    opacity: 1;
-    transform: none;
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .hero-copy > * {
-    animation: rise 0.8s ease both;
-  }
-  .hero-copy > *:nth-child(2) { animation-delay: 0.08s; }
-  .hero-copy > *:nth-child(3) { animation-delay: 0.16s; }
-  .hero-copy > *:nth-child(4) { animation-delay: 0.24s; }
-  .hero-copy > *:nth-child(5) { animation-delay: 0.32s; }
-  .portrait { animation: rise 0.9s ease 0.15s both; }
-
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: none; }
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
   }
 
-  @media (max-width: 900px) {
-    .hero-grid, .about-grid, .skills-grid, .projects-grid, .certs-wrapper, .erp-grid {
-      grid-template-columns: 1fr;
-    }
-    .portrait { width: min(100%, 360px); margin: 0 auto; }
-    .portrait-wrap { padding: 0 0.85rem 0.85rem 0; }
-    section { padding: 4rem 0; }
+  .footer-copy {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
   }
 
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 1.5rem 2rem; }
+    section { padding: 5rem 2.5rem; }
+    #hero { grid-template-columns: 1fr; min-height: auto; padding-top: 6rem; }
+    .hero-left { padding: 4rem 2.5rem 2rem; }
+    .hero-right { padding: 2rem 2.5rem 4rem; justify-content: flex-start; }
+    .hero-photo-frame { width: 240px; height: 300px; }
+    .hero-stats { position: static; margin-top: 2rem; padding-left: 2.5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .certs-wrapper { grid-template-columns: 1fr 1fr; }
+    .erp-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
   @media (max-width: 640px) {
-    .hero-name { font-size: clamp(2.8rem, 14vw, 3.6rem); }
-    .section-title { margin-bottom: 1.75rem; }
+    .nav-links { display: none; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .certs-wrapper { grid-template-columns: 1fr; }
     .lang-grid { grid-template-columns: 1fr 1fr; }
-    .nav-links { gap: 0.4rem 0.9rem; }
-    .nav-links a { letter-spacing: 0.08em; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after {
-      animation: none !important;
-      transition: none !important;
-    }
-    .js .reveal { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
-<a class="skip" href="#hero">Skip to content</a>
-
-<header class="site-header">
+<!-- NAV -->
+<nav>
   <a href="#hero" class="nav-logo">MSLZ</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
@@ -662,417 +819,43 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="#certifications">Certs</a></li>
   </ul>
-</header>
+</nav>
 
-<main>
-  <section id="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <p class="hero-kicker">Product Owner | IT Business Analyst · Chiang Mai, Thailand</p>
-        <h1 class="hero-name">May Shoon<br><em>Lett Zaw</em></h1>
-        <p class="hero-desc">
-          Product Owner and IT Business Analyst focused on digital product development, requirements engineering, and enterprise systems. I partner with stakeholders, designers, and developers to turn business needs into clear product requirements.
-        </p>
-        <div class="hero-cta">
-          <a href="#experience" class="btn btn-primary">View Experience</a>
-          <a href="mailto:mayshoonlettzaw30@gmail.com" class="btn btn-outline" onclick="handleContact(event)">Get in Touch</a>
-        </div>
-        <ul class="hero-stats">
-          <li>
-            <div class="stat-num">4</div>
-            <div class="stat-label">Years Experience</div>
-          </li>
-          <li>
-            <div class="stat-num">5+</div>
-            <div class="stat-label">Platforms</div>
-          </li>
-          <li>
-            <div class="stat-num">4</div>
-            <div class="stat-label">Languages</div>
-          </li>
-        </ul>
-      </div>
-      <div class="portrait-wrap">
-        <div class="portrait">
-          <img src="images/portrait.jpg" alt="May Shoon Lett Zaw" width="1024" height="1024">
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-bg-glow"></div>
 
-  <section id="about">
-    <div class="wrap about-grid">
-      <div class="reveal">
-        <p class="kicker">About</p>
-        <h2 class="section-title">Turning Complexity Into Clarity</h2>
-        <blockquote class="about-quote">
-          Translating business needs into technical solutions, one requirement at a time.
-        </blockquote>
-        <p class="about-text">
-          Product Owner and IT Business Analyst working in digital product development and enterprise systems. Skilled in requirement gathering, process optimization, stakeholder communication, and data analysis, and in translating business needs into technical solutions with ERP systems (SAP S/4HANA, Odoo, Acumatica) and business intelligence tools (Power BI, Tableau).
-        </p>
-        <p class="about-text">
-          Certified in Data Literacy and as an Associate Data Analyst (DataCamp), and Certified in Business Analysis (Agile Enterprise Coach). Experienced in Agile environments, collaborating with cross-functional teams to deliver solutions and support data-informed decision-making.
-        </p>
-        <div class="contact-list">
-          <div class="contact-item">
-            <div class="contact-icon">✆</div>
-            <span>(+66) 0653848697</span>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">✉</div>
-            <a href="mailto:mayshoonlettzaw30@gmail.com">mayshoonlettzaw30@gmail.com</a>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">in</div>
-            <a href="https://www.linkedin.com/in/mayshoonlettzaw30" target="_blank" rel="noopener noreferrer">linkedin.com/in/mayshoonlettzaw30</a>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon">◎</div>
-            <span>Chiang Mai, Thailand</span>
-          </div>
-        </div>
-      </div>
+  <div class="hero-left">
+    <div class="hero-tag">Product Owner | IT Business Analyst · Chiang Mai, Thailand</div>
+    <h1 class="hero-name">May Shoon<br><em>Lett Zaw</em></h1>
+    <p class="hero-desc">
+      From Business Analyst to Product Owner — shaping digital products through requirements
+      engineering, enterprise systems, and stakeholder collaboration. Fluent in requirements, fluent in results.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="mailto:mayshoonlettzaw30@gmail.com" class="btn-outline" onclick="handleContact(event)">Get in Touch</a>
 
-      <div class="reveal">
-        <p class="kicker">Education</p>
-        <h2 class="section-title">Academic Foundation</h2>
-        <div class="edu-list">
-          <article class="edu-card">
-            <div class="edu-label">Master's Degree</div>
-            <h3 class="edu-name">Electronic &amp; Communication</h3>
-            <p class="edu-meta">Beijing University of Post and Telecommunications, China</p>
-          </article>
-          <article class="edu-card">
-            <div class="edu-label">Bachelor's Degree</div>
-            <h3 class="edu-name">Information Technology</h3>
-            <p class="edu-meta">Technological University (Thanlyin)</p>
-          </article>
-          <article class="edu-card">
-            <div class="edu-label">Professional Training</div>
-            <h3 class="edu-name">Professional in Business Analyst (PBA)</h3>
-            <p class="edu-meta">Navesse Business Academy · 35-hour Bootcamp</p>
-          </article>
-        </div>
-
-        <p class="kicker" style="margin-top:2.25rem;">Languages</p>
-        <div class="lang-grid">
-          <div class="lang-card">
-            <div class="lang-top"><span>English</span><span class="lang-pct">95%</span></div>
-            <div class="lang-bar"><span style="width:95%"></span></div>
-          </div>
-          <div class="lang-card">
-            <div class="lang-top"><span>Burmese</span><span class="lang-pct">100%</span></div>
-            <div class="lang-bar"><span style="width:100%"></span></div>
-          </div>
-          <div class="lang-card">
-            <div class="lang-top"><span>Chinese</span><span class="lang-pct">70%</span></div>
-            <div class="lang-bar"><span style="width:70%"></span></div>
-          </div>
-          <div class="lang-card">
-            <div class="lang-top"><span>Thai</span><span class="lang-pct">40%</span></div>
-            <div class="lang-bar"><span style="width:40%"></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience">
-    <div class="wrap">
-      <p class="kicker">Career</p>
-      <h2 class="section-title">Professional Experience</h2>
-      <div class="timeline">
-
-        <article class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-date">JUL 2026 – PRESENT</span>
-          </div>
-          <h3 class="timeline-role">Product Owner</h3>
-          <p class="timeline-company">Digit7s</p>
-          <ul class="timeline-bullets">
-            <li>Gather, analyze, and translate business requirements into Product Requirements Documents (PRDs), functional specifications, user stories, and acceptance criteria.</li>
-            <li>Collaborate with developers, UI/UX designers, QA engineers, and business stakeholders to align business requirements with technical implementation.</li>
-            <li>Define business rules, user journeys, workflows, and system functionalities.</li>
-            <li>Review UI/UX prototypes and provide functional feedback.</li>
-            <li>Manage requirement clarifications, documentation updates, and cross-functional alignment.</li>
-            <li>Support product planning, feature prioritization, and continuous improvement.</li>
-          </ul>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-date">JAN 2026 – PRESENT</span>
-            <span class="timeline-location">📍 Remote</span>
-          </div>
-          <h3 class="timeline-role">Product Owner</h3>
-          <p class="timeline-company">Solution Tech Area Company</p>
-          <ul class="timeline-bullets">
-            <li>Defined product vision, roadmap, and feature priorities based on business goals and user needs.</li>
-            <li>Gathered and analyzed stakeholder requirements to identify opportunities for product improvement and innovation.</li>
-            <li>Created, maintained, and prioritized the product backlog to ensure alignment with business objectives.</li>
-            <li>Wrote user stories, acceptance criteria, and functional requirements for development teams.</li>
-            <li>Collaborated closely with UI/UX designers to define user journeys, wireframes, and intuitive user experiences.</li>
-            <li>Evaluated and proposed new features to enhance product value, engagement, and usability.</li>
-            <li>Worked with developers throughout the development lifecycle to clarify requirements and support implementation.</li>
-            <li>Facilitated backlog refinement, sprint planning, and product review sessions within an Agile environment.</li>
-            <li>Conducted feature validation and acceptance testing to ensure deliverables met business and user expectations.</li>
-            <li>Acted as the primary liaison between stakeholders, design teams, and developers to align product strategy and execution.</li>
-          </ul>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-date">SEP 2025 – FEB 2026</span>
-            <span class="timeline-location">📍 Chiang Mai, Thailand</span>
-          </div>
-          <h3 class="timeline-role">IT Business Analyst</h3>
-          <p class="timeline-company">Manao Software Development Company</p>
-          <ul class="timeline-bullets">
-            <li>Supported the sales team during the pre-sales phase by analyzing client requirements and contributing to proposed software solutions.</li>
-            <li>Collaborated with product owners and stakeholders to elicit, clarify, and validate business and functional requirements.</li>
-            <li>Translated business needs into user stories, functional specifications, process flows, and low-fidelity mock-ups.</li>
-            <li>Coordinated closely with the technical team and design teams to ensure feasibility, clarity, and alignment of proposed solutions.</li>
-            <li>Facilitated Agile ceremonies, including daily stand-ups, backlog grooming, sprint planning, and retrospectives.</li>
-            <li>Prepared, maintained, and prioritized product backlog items and tickets (e.g., Jira) to support sprint execution.</li>
-            <li>Acted as a key communication bridge between business stakeholders and technical teams throughout the delivery lifecycle.</li>
-            <li>Supported sprint delivery by clarifying requirements, addressing questions, and ensuring deliverables met agreed acceptance criteria.</li>
-          </ul>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-date">APR 2024 – NOV 2024</span>
-            <span class="timeline-location">📍 Yangon, Myanmar</span>
-          </div>
-          <h3 class="timeline-role">IT Business Analyst</h3>
-          <p class="timeline-company">Yoma Strategic Holdings Limited (OneNex)</p>
-          <ul class="timeline-bullets">
-            <li>Collaborated with stakeholders to gather, assess, and document business requirements for website and mobile applications.</li>
-            <li>Created user stories, use cases, process flows, and functional documentation to ensure clear communication between business and technical teams.</li>
-            <li>Partnered with development teams to align technical solutions with business objectives.</li>
-            <li>Acted as a liaison between business stakeholders and UI/UX designers and developers to facilitate smooth project execution.</li>
-            <li>Assisted in user acceptance testing (UAT) to ensure solutions met business needs and quality standards.</li>
-          </ul>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-date">OCT 2023 – MAR 2024</span>
-            <span class="timeline-location">📍 Yangon, Myanmar</span>
-          </div>
-          <h3 class="timeline-role">IT Business Analyst</h3>
-          <p class="timeline-company">7th Computing Company Limited</p>
-          <ul class="timeline-bullets">
-            <li>Gathered business requirements for Odoo ERP implementation, ensuring solutions aligned with operational needs.</li>
-            <li>Led user acceptance testing (UAT) and provided training for end-users.</li>
-            <li>Managed multiple Odoo project lifecycles from planning to post-launch support.</li>
-            <li>Worked closely with clients, developers, and managerial staff to ensure smooth ERP deployment and issue resolution.</li>
-          </ul>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-meta">
-            <span class="timeline-date">NOV 2022 – OCT 2023</span>
-            <span class="timeline-location">📍 Yangon, Myanmar</span>
-          </div>
-          <h3 class="timeline-role">ERP Functional Consultant</h3>
-          <p class="timeline-company">ACE Data Systems Company Limited</p>
-          <ul class="timeline-bullets">
-            <li>Participated in end-to-end SAP S/4HANA implementation for Pepsi Myanmar and UPG, supporting MM, PP, and PM modules.</li>
-            <li>Gathered and analyzed business requirements, conducted gap analysis, and translated needs into functional ERP solutions.</li>
-            <li>Collaborated with business stakeholders, key users, developers, and project teams to ensure successful ERP implementation.</li>
-            <li>Prepared and executed UAT, validated business scenarios, documented issues, and coordinated defect resolution with technical teams.</li>
-            <li>Delivered user training sessions, created training materials, and supported change management for successful system adoption.</li>
-            <li>Provided Go-Live and post-implementation support, troubleshooting critical issues and minimizing business disruption during rollout.</li>
-            <li>Assisted in business process optimization by identifying operational bottlenecks and recommending improvements aligned with ERP best practices.</li>
-            <li>Supported data migration activities including validation, cleansing, reconciliation, and migration testing to ensure data accuracy.</li>
-            <li>Worked on the Acumatica MCE project — gathered requirements and collaborated with developers to implement functional enhancements.</li>
-            <li>Participated in UI improvement initiatives, identifying usability issues and recommending enhancements to streamline operations.</li>
-            <li>Performed functional testing, defect verification, and deployment support to ensure solutions met quality standards.</li>
-            <li>Acted as liaison between business users and technical teams, facilitating communication and ensuring timely resolution of project issues.</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="wrap">
-      <p class="kicker">Capabilities</p>
-      <h2 class="section-title">Skills &amp; Tools</h2>
-      <div class="skills-grid">
-        <article class="skill-group reveal">
-          <div class="skill-group-icon">◈</div>
-          <h3 class="skill-group-title">Business Analysis</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Requirement Gathering</span>
-            <span class="skill-tag">Stakeholder Management</span>
-            <span class="skill-tag">Agile &amp; Scrum</span>
-            <span class="skill-tag">Business Process Mapping</span>
-            <span class="skill-tag">Gap Analysis</span>
-            <span class="skill-tag">UAT</span>
-            <span class="skill-tag">User Stories</span>
-            <span class="skill-tag">Process Flows</span>
-            <span class="skill-tag">Product Ownership</span>
-            <span class="skill-tag">PRD Development</span>
-            <span class="skill-tag">Requirements Engineering</span>
-            <span class="skill-tag">Business Process Modeling</span>
-            <span class="skill-tag">Agile Methodologies</span>
-            <span class="skill-tag">UI/UX Collaboration</span>
-          </div>
-        </article>
-        <article class="skill-group reveal">
-          <div class="skill-group-icon">◉</div>
-          <h3 class="skill-group-title">Technical &amp; Data Analysis</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">SQL (Expert)</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">HTML / CSS</span>
-            <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">Tableau</span>
-            <span class="skill-tag">Excel (Advanced)</span>
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">NS2 / OTCL</span>
-          </div>
-        </article>
-        <article class="skill-group reveal">
-          <div class="skill-group-icon">◧</div>
-          <h3 class="skill-group-title">BA Tools &amp; PM</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">JIRA</span>
-            <span class="skill-tag">Confluence</span>
-            <span class="skill-tag">Figma</span>
-            <span class="skill-tag">Draw.io</span>
-            <span class="skill-tag">Balsamiq</span>
-            <span class="skill-tag">Wireframe</span>
-            <span class="skill-tag">Microsoft 365</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="wrap">
-      <p class="kicker">Work</p>
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="projects-grid">
-        <article class="project-card reveal">
-          <div class="project-num">01</div>
-          <h3 class="project-title">Synpitarn Lending Platform</h3>
-          <a href="https://www.synpitarn.com" target="_blank" rel="noopener noreferrer" class="project-link">↗ synpitarn.com</a>
-          <p class="project-desc">
-            Digitalized loan application process for Myanmar-speaking clients, improving financial literacy accessibility
-            and seamless user experience through multilingual support. Played a key role in gathering requirements,
-            bridging stakeholder communication, and ensuring smooth system implementation. Improved loan accessibility,
-            operational efficiency, and customer engagement.
-          </p>
-        </article>
-        <article class="project-card reveal">
-          <div class="project-num">02</div>
-          <h3 class="project-title">Pocket — Digital Lifestyle App</h3>
-          <a href="https://apps.apple.com/us/app/pocket-mm/id1661924254" target="_blank" rel="noopener noreferrer" class="project-link">↗ App Store</a>
-          <p class="project-desc">
-            A digital lifestyle platform designed to enhance convenience and elevate everyday shopping experiences.
-            Partners with businesses across various industries to offer users exclusive rewards, discounts, and perks.
-            Also serves as a communication platform fostering better engagement between businesses and customers.
-          </p>
-        </article>
-        <article class="project-card reveal">
-          <div class="project-num">03</div>
-          <h3 class="project-title">SAP S4/HANA ERP — Pepsi &amp; UPG</h3>
-          <a href="#erp" class="project-link">↗ ERP Certifications</a>
-          <p class="project-desc">
-            Led full SAP S4-HANA implementation covering MM and PP modules for Pepsi Myanmar and United Paint Group.
-            Conducted UAT training, provided Go Live support, and optimized ERP processes. Reduced downtime
-            and improved production efficiency by identifying and resolving bottlenecks in real-time.
-          </p>
-        </article>
-        <article class="project-card reveal">
-          <div class="project-num">04</div>
-          <h3 class="project-title">Odoo ERP — Multi-Project Lifecycle</h3>
-          <a href="#erp" class="project-link">↗ ERP Certifications</a>
-          <p class="project-desc">
-            Managed multiple Odoo ERP project lifecycles from planning through post-launch support at 7th Computing
-            Company. Gathered business requirements, led UAT, and provided end-user training. Worked closely with
-            clients, developers, and management to ensure smooth deployment and issue resolution.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="certifications">
-    <div class="wrap">
-      <p class="kicker">Achievements</p>
-      <h2 class="section-title">Certifications &amp; Achievements</h2>
-      <div class="certs-wrapper">
-        <article class="cert-card reveal"><div class="cert-provider">DataCamp</div><h3 class="cert-name">Certified in Data Literacy</h3></article>
-        <article class="cert-card reveal"><div class="cert-provider">DataCamp</div><h3 class="cert-name">Associate Data Analyst Certification</h3></article>
-        <article class="cert-card reveal"><div class="cert-provider">DataCamp</div><h3 class="cert-name">SQL Associate Certification</h3></article>
-        <article class="cert-card reveal"><div class="cert-provider">Microsoft</div><h3 class="cert-name">Excel Data Analysis: Pivot Tables &amp; Formulas</h3></article>
-        <article class="cert-card reveal"><div class="cert-provider">Agile Enterprise Coach</div><h3 class="cert-name">Business Analyst Certification</h3></article>
-        <article class="cert-card reveal"><div class="cert-provider">Navesse Business Academy</div><h3 class="cert-name">Professional in Business Analyst (PBA) — 35hrs</h3></article>
-        <article class="cert-card reveal"><div class="cert-provider">SAP</div><h3 class="cert-name">RISE with SAP S/4HANA Cloud Private Edition</h3></article>
-        <article class="cert-card reveal"><div class="cert-provider">Acumatica</div><h3 class="cert-name">Odoo Functional Certification</h3></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="erp">
-    <div class="wrap">
-      <p class="kicker">ERP Expertise</p>
-      <h2 class="section-title">ERP Certifications</h2>
-      <div class="erp-grid">
-        <article class="erp-platform reveal">
-          <h3 class="erp-name">SAP S/4HANA</h3>
-          <ul class="erp-certs">
-            <li>RISE with SAP S/4HANA Cloud Private Edition: Cloud Architecture</li>
-            <li>SAP Ariba: Presales Skills</li>
-            <li>Value Added Reseller (VAR) Support Consultant Qualification</li>
-          </ul>
-        </article>
-        <article class="erp-platform reveal">
-          <h3 class="erp-name">Acumatica</h3>
-          <ul class="erp-certs">
-            <li>Technical Specialist</li>
-            <li>OData Integration Developer REST</li>
-            <li>API Integration Developer</li>
-            <li>Mobile Application Developer</li>
-            <li>Inventory and Order Management</li>
-            <li>Manufacturing Business Consultant</li>
-          </ul>
-        </article>
-        <article class="erp-platform reveal">
-          <h3 class="erp-name">Odoo</h3>
-          <ul class="erp-certs">
-            <li>Odoo Functional Certification</li>
-            <li>Full lifecycle implementation experience</li>
-            <li>User training &amp; UAT specialist</li>
-            <li>Multi-project post-launch support</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="footer-name">May Shoon Lett Zaw</div>
-  <p class="footer-copy">© 2026 · Product Owner | IT Business Analyst · Chiang Mai, Thailand</p>
-</footer>
-
-<div id="contact-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="contact-title">
-  <div class="modal-panel">
-    <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
-    <p class="modal-kicker">Get in touch</p>
-    <h2 id="contact-title" class="modal-title">Let's Connect</h2>
-    <div class="modal-links">
-      <a href="mailto:mayshoonlettzaw30@gmail.com"><span>✉</span> mayshoonlettzaw30@gmail.com</a>
-      <a href="tel:+660653848697"><span>✆</span> (+66) 0653848697</a>
-      <a href="https://www.linkedin.com/in/mayshoonlettzaw30" target="_blank" rel="noopener noreferrer"><span>in</span> linkedin.com/in/mayshoonlettzaw30</a>
-      <button type="button" id="copy-btn" onclick="copyEmail()">Copy Email Address</button>
+<!-- Contact Modal -->
+<div id="contact-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:var(--dark-3);border:1px solid rgba(201,169,110,0.3);padding:2.5rem;max-width:420px;width:90%;position:relative;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));">
+    <button onclick="closeModal()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:var(--text-muted);font-size:1.2rem;cursor:pointer;">✕</button>
+    <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.2em;margin-bottom:1rem;">GET IN TOUCH</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--cream);margin-bottom:1.5rem;">Let's Connect</div>
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <a href="mailto:mayshoonlettzaw30@gmail.com" style="display:flex;align-items:center;gap:0.8rem;padding:0.9rem 1.2rem;border:1px solid rgba(201,169,110,0.2);color:var(--text);text-decoration:none;font-size:0.85rem;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(201,169,110,0.5)'" onmouseout="this.style.borderColor='rgba(201,169,110,0.2)'">
+        <span style="color:var(--gold);">✉</span> mayshoonlettzaw30@gmail.com
+      </a>
+      <a href="tel:+660653848697" style="display:flex;align-items:center;gap:0.8rem;padding:0.9rem 1.2rem;border:1px solid rgba(201,169,110,0.2);color:var(--text);text-decoration:none;font-size:0.85rem;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(201,169,110,0.5)'" onmouseout="this.style.borderColor='rgba(201,169,110,0.2)'">
+        <span style="color:var(--gold);">✆</span> (+66) 0653848697
+      </a>
+      <a href="https://www.linkedin.com/in/mayshoonlettzaw30" target="_blank" style="display:flex;align-items:center;gap:0.8rem;padding:0.9rem 1.2rem;border:1px solid rgba(201,169,110,0.2);color:var(--text);text-decoration:none;font-size:0.85rem;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(201,169,110,0.5)'" onmouseout="this.style.borderColor='rgba(201,169,110,0.2)'">
+        <span style="color:var(--gold);">in</span> linkedin.com/in/mayshoonlettzaw30
+      </a>
+      <button onclick="copyEmail()" style="display:flex;align-items:center;justify-content:center;gap:0.8rem;padding:0.9rem 1.2rem;background:var(--gold);border:none;color:var(--dark);font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;margin-top:0.5rem;transition:background 0.2s;" onmouseover="this.style.background='#E8D5B0'" onmouseout="this.style.background='var(--gold)'" id="copy-btn">
+        Copy Email Address
+      </button>
     </div>
   </div>
 </div>
@@ -1080,45 +863,458 @@
 <script>
 function handleContact(e) {
   e.preventDefault();
-  document.getElementById("contact-modal").classList.add("is-open");
+  var modal = document.getElementById('contact-modal');
+  modal.style.display = 'flex';
 }
 function closeModal() {
-  document.getElementById("contact-modal").classList.remove("is-open");
+  document.getElementById('contact-modal').style.display = 'none';
 }
 function copyEmail() {
-  var done = function () {
-    var btn = document.getElementById("copy-btn");
-    btn.textContent = "Copied";
-    setTimeout(function () { btn.textContent = "Copy Email Address"; }, 2000);
-  };
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText("mayshoonlettzaw30@gmail.com").then(done);
-  }
+  navigator.clipboard.writeText('mayshoonlettzaw30@gmail.com').then(function() {
+    var btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(function(){ btn.textContent = 'Copy Email Address'; }, 2000);
+  });
 }
-document.getElementById("contact-modal").addEventListener("click", function (e) {
+document.getElementById('contact-modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") closeModal();
-});
-
-(function () {
-  var nodes = document.querySelectorAll(".reveal");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce || !("IntersectionObserver" in window)) {
-    nodes.forEach(function (el) { el.classList.add("is-in"); });
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-in");
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-  nodes.forEach(function (el) { io.observe(el); });
-})();
 </script>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo-frame">
+      <div class="hero-photo-inner">
+        <img src="images/portrait.jpg" alt="May Shoon Lett Zaw" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+      </div>
+      <div class="hero-photo-decoration"></div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="divider-line"></div>
+    <div class="stat-item">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Platforms</div>
+    </div>
+    <div class="divider-line"></div>
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Languages</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Turning Complexity<br>Into Clarity</h2>
+    <blockquote class="about-quote">
+      "Translating business needs into technical solutions — one requirement at a time."
+    </blockquote>
+    <p class="about-text">
+      Product Owner and IT Business Analyst with expertise in requirement gathering, process optimization, stakeholder
+      communication, and data analysis. Skilled in translating business needs into technical solutions
+      using ERP systems (SAP S/4HANA, Odoo, Acumatica) and business intelligence tools (Power BI, Tableau).
+    </p>
+    <p class="about-text">
+      Certified in Data Literacy and Associate Data Analyst (DataCamp) and Certified in Business Analysis
+      (Agile Enterprise Coach). Experienced in Agile environments, collaborating with cross-functional teams
+      to deliver impactful solutions and drive data-informed decision-making.
+    </p>
+    <div class="contact-list">
+      <div class="contact-item">
+        <div class="contact-icon">✆</div>
+        <span>(+66) 0653848697</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <a href="mailto:mayshoonlettzaw30@gmail.com">mayshoonlettzaw30@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">in</div>
+        <a href="https://www.linkedin.com/in/mayshoonlettzaw30" target="_blank">linkedin.com/in/mayshoonlettzaw30</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">◎</div>
+        <span>Chiang Mai, Thailand</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-right">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Academic<br>Foundation</h2>
+
+    <div style="display:flex; flex-direction:column; gap:1.25rem; margin-bottom:3rem;">
+      <div style="background:var(--dark-3);border:1px solid rgba(201,169,110,0.12);padding:1.5rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.15em;margin-bottom:0.4rem;">MASTER'S DEGREE</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--cream);margin-bottom:0.25rem;">Electronic & Communication</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Beijing University of Post and Telecommunications, China</div>
+      </div>
+      <div style="background:var(--dark-3);border:1px solid rgba(201,169,110,0.12);padding:1.5rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.15em;margin-bottom:0.4rem;">BACHELOR'S DEGREE</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--cream);margin-bottom:0.25rem;">Information Technology</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Technological University (Thanlyin)</div>
+      </div>
+      <div style="background:var(--dark-3);border:1px solid rgba(201,169,110,0.12);padding:1.5rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.15em;margin-bottom:0.4rem;">PROFESSIONAL TRAINING</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--cream);margin-bottom:0.25rem;">Professional in Business Analyst (PBA)</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">Navesse Business Academy · 35-hour Bootcamp</div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:1rem;">Languages</div>
+    <div class="lang-grid">
+      <div class="lang-card">
+        <div class="lang-name">English</div>
+        <div class="lang-pct">95%</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:95%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Burmese</div>
+        <div class="lang-pct">100%</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Chinese</div>
+        <div class="lang-pct">70%</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:70%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Thai</div>
+        <div class="lang-pct">40%</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:40%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">Professional<br>Experience</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">JUL 2026 – PRESENT</span>
+      </div>
+      <div class="timeline-role">Product Owner</div>
+      <div class="timeline-company">Digit7s</div>
+      <ul class="timeline-bullets">
+        <li>Gather, analyze, and translate business requirements into Product Requirements Documents (PRDs), functional specifications, user stories, and acceptance criteria.</li>
+        <li>Collaborate with developers, UI/UX designers, QA engineers, and business stakeholders to align business requirements with technical implementation.</li>
+        <li>Define business rules, user journeys, workflows, and system functionalities.</li>
+        <li>Review UI/UX prototypes and provide functional feedback.</li>
+        <li>Manage requirement clarifications, documentation updates, and cross-functional alignment.</li>
+        <li>Support product planning, feature prioritization, and continuous improvement.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">JAN 2026 – PRESENT</span>
+        <span class="timeline-location">📍 Remote</span>
+      </div>
+      <div class="timeline-role">Product Owner</div>
+      <div class="timeline-company">Solution Tech Area Company</div>
+      <ul class="timeline-bullets">
+        <li>Defined product vision, roadmap, and feature priorities based on business goals and user needs.</li>
+        <li>Gathered and analyzed stakeholder requirements to identify opportunities for product improvement and innovation.</li>
+        <li>Created, maintained, and prioritized the product backlog to ensure alignment with business objectives.</li>
+        <li>Wrote user stories, acceptance criteria, and functional requirements for development teams.</li>
+        <li>Collaborated closely with UI/UX designers to define user journeys, wireframes, and intuitive user experiences.</li>
+        <li>Evaluated and proposed new features to enhance product value, engagement, and usability.</li>
+        <li>Worked with developers throughout the development lifecycle to clarify requirements and support implementation.</li>
+        <li>Facilitated backlog refinement, sprint planning, and product review sessions within an Agile environment.</li>
+        <li>Conducted feature validation and acceptance testing to ensure deliverables met business and user expectations.</li>
+        <li>Acted as the primary liaison between stakeholders, design teams, and developers to align product strategy and execution.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">SEP 2025 – FEB 2026</span>
+        <span class="timeline-location">📍 Chiang Mai, Thailand</span>
+      </div>
+      <div class="timeline-role">IT Business Analyst</div>
+      <div class="timeline-company">Manao Software Development Company</div>
+      <ul class="timeline-bullets">
+        <li>Supported the sales team during the pre-sales phase by analyzing client requirements and contributing to proposed software solutions.</li>
+        <li>Collaborated with product owners and stakeholders to elicit, clarify, and validate business and functional requirements.</li>
+        <li>Translated business needs into user stories, functional specifications, process flows, and low-fidelity mock-ups.</li>
+        <li>Coordinated closely with the technical team and design teams to ensure feasibility, clarity, and alignment of proposed solutions.</li>
+        <li>Facilitated Agile ceremonies, including daily stand-ups, backlog grooming, sprint planning, and retrospectives.</li>
+        <li>Prepared, maintained, and prioritized product backlog items and tickets (e.g., Jira) to support sprint execution.</li>
+        <li>Acted as a key communication bridge between business stakeholders and technical teams throughout the delivery lifecycle.</li>
+        <li>Supported sprint delivery by clarifying requirements, addressing questions, and ensuring deliverables met agreed acceptance criteria.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">APR 2024 – NOV 2024</span>
+        <span class="timeline-location">📍 Yangon, Myanmar</span>
+      </div>
+      <div class="timeline-role">IT Business Analyst</div>
+      <div class="timeline-company">Yoma Strategic Holdings Limited (OneNex)</div>
+      <ul class="timeline-bullets">
+        <li>Collaborated with stakeholders to gather, assess, and document business requirements for website and mobile applications.</li>
+        <li>Created user stories, use cases, process flows, and functional documentation to ensure clear communication between business and technical teams.</li>
+        <li>Partnered with development teams to align technical solutions with business objectives.</li>
+        <li>Acted as a liaison between business stakeholders and UI/UX designers and developers to facilitate smooth project execution.</li>
+        <li>Assisted in user acceptance testing (UAT) to ensure solutions met business needs and quality standards.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">OCT 2023 – MAR 2024</span>
+        <span class="timeline-location">📍 Yangon, Myanmar</span>
+      </div>
+      <div class="timeline-role">IT Business Analyst</div>
+      <div class="timeline-company">7th Computing Company Limited</div>
+      <ul class="timeline-bullets">
+        <li>Gathered business requirements for Odoo ERP implementation, ensuring solutions aligned with operational needs.</li>
+        <li>Led user acceptance testing (UAT) and provided training for end-users.</li>
+        <li>Managed multiple Odoo project lifecycles from planning to post-launch support.</li>
+        <li>Worked closely with clients, developers, and managerial staff to ensure smooth ERP deployment and issue resolution.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-date">NOV 2022 – OCT 2023</span>
+        <span class="timeline-location">📍 Yangon, Myanmar</span>
+      </div>
+      <div class="timeline-role">ERP Functional Consultant</div>
+      <div class="timeline-company">ACE Data Systems Company Limited</div>
+      <ul class="timeline-bullets">
+        <li>Participated in end-to-end SAP S/4HANA implementation for Pepsi Myanmar and UPG, supporting MM, PP, and PM modules.</li>
+        <li>Gathered and analyzed business requirements, conducted gap analysis, and translated needs into functional ERP solutions.</li>
+        <li>Collaborated with business stakeholders, key users, developers, and project teams to ensure successful ERP implementation.</li>
+        <li>Prepared and executed UAT, validated business scenarios, documented issues, and coordinated defect resolution with technical teams.</li>
+        <li>Delivered user training sessions, created training materials, and supported change management for successful system adoption.</li>
+        <li>Provided Go-Live and post-implementation support, troubleshooting critical issues and minimizing business disruption during rollout.</li>
+        <li>Assisted in business process optimization by identifying operational bottlenecks and recommending improvements aligned with ERP best practices.</li>
+        <li>Supported data migration activities including validation, cleansing, reconciliation, and migration testing to ensure data accuracy.</li>
+        <li>Worked on the Acumatica MCE project — gathered requirements and collaborated with developers to implement functional enhancements.</li>
+        <li>Participated in UI improvement initiatives, identifying usability issues and recommending enhancements to streamline operations.</li>
+        <li>Performed functional testing, defect verification, and deployment support to ensure solutions met quality standards.</li>
+        <li>Acted as liaison between business users and technical teams, facilitating communication and ensuring timely resolution of project issues.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title">Skills &amp; Tools</h2>
+
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-icon">◈</div>
+      <div class="skill-group-title">Business Analysis</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Requirement Gathering</span>
+        <span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">Agile & Scrum</span>
+        <span class="skill-tag">Business Process Mapping</span>
+        <span class="skill-tag">Gap Analysis</span>
+        <span class="skill-tag">UAT</span>
+        <span class="skill-tag">User Stories</span>
+        <span class="skill-tag">Process Flows</span>
+        <span class="skill-tag">Product Ownership</span>
+        <span class="skill-tag">PRD Development</span>
+        <span class="skill-tag">Requirements Engineering</span>
+        <span class="skill-tag">Business Process Modeling</span>
+        <span class="skill-tag">Agile Methodologies</span>
+        <span class="skill-tag">UI/UX Collaboration</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-icon">◉</div>
+      <div class="skill-group-title">Technical & Data Analysis</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL (Expert)</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Excel (Advanced)</span>
+        <span class="skill-tag">MATLAB</span>
+        <span class="skill-tag">NS2 / OTCL</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-icon">◧</div>
+      <div class="skill-group-title">BA Tools & PM</div>
+      <div class="skill-tags">
+        <span class="skill-tag">JIRA</span>
+        <span class="skill-tag">Confluence</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Draw.io</span>
+        <span class="skill-tag">Balsamiq</span>
+        <span class="skill-tag">Wireframe</span>
+        <span class="skill-tag">Microsoft 365</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Work</div>
+  <h2 class="section-title">Featured Projects</h2>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-title">Synpitarn Lending Platform</div>
+      <a href="https://www.synpitarn.com" target="_blank" class="project-link">↗ synpitarn.com</a>
+      <p class="project-desc">
+        Digitalized loan application process for Myanmar-speaking clients, improving financial literacy accessibility
+        and seamless user experience through multilingual support. Played a key role in gathering requirements,
+        bridging stakeholder communication, and ensuring smooth system implementation. Improved loan accessibility,
+        operational efficiency, and customer engagement.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-title">Pocket — Digital Lifestyle App</div>
+      <a href="https://apps.apple.com/us/app/pocket-mm/id1661924254" target="_blank" class="project-link">↗ App Store</a>
+      <p class="project-desc">
+        A digital lifestyle platform designed to enhance convenience and elevate everyday shopping experiences.
+        Partners with businesses across various industries to offer users exclusive rewards, discounts, and perks.
+        Also serves as a communication platform fostering better engagement between businesses and customers.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-title">SAP S4/HANA ERP — Pepsi & UPG</div>
+      <a href="#erp" class="project-link">↗ ERP Certifications</a>
+      <p class="project-desc">
+        Led full SAP S4-HANA implementation covering MM and PP modules for Pepsi Myanmar and United Paint Group.
+        Conducted UAT training, provided Go Live support, and optimized ERP processes. Reduced downtime
+        and improved production efficiency by identifying and resolving bottlenecks in real-time.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-title">Odoo ERP — Multi-Project Lifecycle</div>
+      <a href="#erp" class="project-link">↗ ERP Certifications</a>
+      <p class="project-desc">
+        Managed multiple Odoo ERP project lifecycles from planning through post-launch support at 7th Computing
+        Company. Gathered business requirements, led UAT, and provided end-user training. Worked closely with
+        clients, developers, and management to ensure smooth deployment and issue resolution.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Achievements</div>
+  <h2 class="section-title">Certifications &amp;<br>Achievements</h2>
+
+  <div class="certs-wrapper">
+    <div class="cert-card">
+      <div class="cert-provider">DataCamp</div>
+      <div class="cert-name">Certified in Data Literacy</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-provider">DataCamp</div>
+      <div class="cert-name">Associate Data Analyst Certification</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-provider">DataCamp</div>
+      <div class="cert-name">SQL Associate Certification</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-provider">Microsoft</div>
+      <div class="cert-name">Excel Data Analysis: Pivot Tables & Formulas</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-provider">Agile Enterprise Coach</div>
+      <div class="cert-name">Business Analyst Certification</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-provider">Navesse Business Academy</div>
+      <div class="cert-name">Professional in Business Analyst (PBA) — 35hrs</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-provider">SAP</div>
+      <div class="cert-name">RISE with SAP S/4HANA Cloud Private Edition</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-provider">Acumatica</div>
+      <div class="cert-name">Odoo Functional Certification</div>
+    </div>
+  </div>
+</section>
+
+<!-- ERP -->
+<section id="erp">
+  <div class="section-label">ERP Expertise</div>
+  <h2 class="section-title">ERP Certifications</h2>
+
+  <div class="erp-grid">
+    <div class="erp-platform">
+      <div class="erp-platform-name">SAP S/4HANA</div>
+      <ul class="erp-certs">
+        <li>RISE with SAP S/4HANA Cloud Private Edition: Cloud Architecture</li>
+        <li>SAP Ariba: Presales Skills</li>
+        <li>Value Added Reseller (VAR) Support Consultant Qualification</li>
+      </ul>
+    </div>
+    <div class="erp-platform">
+      <div class="erp-platform-name">Acumatica</div>
+      <ul class="erp-certs">
+        <li>Technical Specialist</li>
+        <li>OData Integration Developer REST</li>
+        <li>API Integration Developer</li>
+        <li>Mobile Application Developer</li>
+        <li>Inventory and Order Management</li>
+        <li>Manufacturing Business Consultant</li>
+      </ul>
+    </div>
+    <div class="erp-platform">
+      <div class="erp-platform-name">Odoo</div>
+      <ul class="erp-certs">
+        <li>Odoo Functional Certification</li>
+        <li>Full lifecycle implementation experience</li>
+        <li>User training & UAT specialist</li>
+        <li>Multi-project post-launch support</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">May Shoon Lett Zaw</div>
+  <div class="footer-copy">© 2026 · Product Owner | IT Business Analyst · Chiang Mai, Thailand</div>
+</footer>
+
 </body>
 </html>
