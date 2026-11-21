@@ -303,6 +303,7 @@
   }
 
   #about, #skills, #education { background: var(--white); }
+  #certifications, #erp { scroll-margin-top: 5rem; }
   #experience, #projects, #contact { background: var(--ice); }
 
   .section-intro { max-width: 40rem; margin: 0 0 2rem; }
@@ -410,9 +411,11 @@
     padding: 0.85rem 1rem;
     background: var(--white);
     border: 1px solid var(--line);
-    border-radius: 10px;
+    border-radius: 12px;
   }
+  .lang-list li { background: var(--ice); }
   .lang-list span:last-child { color: var(--deep); font-weight: 600; }
+  .contact-action { margin-top: 1rem; }
   .contact-list { display: grid; gap: 0.75rem; }
   .contact-list li { justify-content: flex-start; align-items: center; }
   .contact-list a { overflow-wrap: anywhere; font-weight: 600; }
@@ -874,7 +877,7 @@
         <li><span aria-hidden="true">✆</span> <a href="tel:+660653848697">(+66) 0653848697</a></li>
         <li><span aria-hidden="true">in</span> <a href="https://www.linkedin.com/in/mayshoonlettzaw30" target="_blank" rel="noopener noreferrer">linkedin.com/in/mayshoonlettzaw30</a></li>
       </ul>
-      <p style="margin-top:1rem;">
+      <p class="contact-action">
         <button class="btn btn-navy" type="button" id="copy-btn">Copy Email Address</button>
       </p>
     </div>
