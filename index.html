@@ -218,22 +218,37 @@
 
   .specialties {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
     margin: 2rem 0 0;
     padding: 0;
     list-style: none;
+    align-items: stretch;
   }
   .specialties li {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
     min-width: 0;
+    height: 100%;
     padding: 0.9rem 1rem;
     border: 1px solid rgba(100, 116, 139, 0.85);
     border-radius: 12px;
     background: transparent;
     transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .specialty-experience {
+    align-items: center;
+    border-color: var(--blue);
+    background: rgba(59, 130, 246, 0.08);
+  }
+  .specialty-num {
+    flex: 0 0 auto;
+    margin: 0;
+    color: var(--blue);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
   }
   .specialties li:hover {
     border-color: var(--blue);
@@ -443,13 +458,17 @@
       border-top: 1px solid var(--line);
     }
     .hero-grid, .about-grid, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    .specialties { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .portrait, .about-photo { margin: 0 auto; }
   }
 
   @media (max-width: 640px) {
     section { padding: 3.5rem 0; }
     #hero { padding: 3rem 0 3.25rem; }
-    .certs, .specialties { grid-template-columns: 1fr; }
+    .certs { grid-template-columns: 1fr; }
+    .specialties { grid-template-columns: 1fr; gap: 0.6rem; }
+    .specialties li { padding: 0.75rem 0.7rem; gap: 0.55rem; }
+    .specialties li:not(.specialty-experience) .specialty-note { display: none; }
     h1 { font-size: 2.3rem; }
   }
 
@@ -499,6 +518,13 @@
       </div>
     </div>
     <ul class="specialties">
+      <li class="specialty-experience">
+        <p class="specialty-num">4+</p>
+        <div>
+          <p class="specialty-title">Years of Experience</p>
+          <p class="specialty-note">IT &amp; Digital Solutions</p>
+        </div>
+      </li>
       <li>
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
